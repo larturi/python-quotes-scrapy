@@ -46,6 +46,11 @@ class QuotesSpider(scrapy.Spider):
             '//div[contains(@class, "tags-box")]//a[contains(@class, "tag")]/text()'
         ).getall()
         
+        top = getattr(self, 'top', None)
+        if top:
+            top = int(top)
+            tags = tags[:top]
+
         yield {
             'title': title,
             'tags': tags
